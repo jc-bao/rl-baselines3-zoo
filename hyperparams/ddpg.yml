@@ -121,3 +121,12 @@ InvertedDoublePendulumBulletEnv-v0:
 InvertedPendulumSwingupBulletEnv-v0:
   <<: *pybullet-defaults
   n_timesteps: !!float 3e5
+
+# Personal
+XarmPDHandoverNoGoal-v1:
+  <<: *pybullet-defaults
+  train_freq: [8, "episode"]
+  n_timesteps: !!float 8e8
+  batch_size: 128
+  learning_starts: 3200
+

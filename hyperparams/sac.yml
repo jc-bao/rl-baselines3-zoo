@@ -256,3 +256,11 @@ NeckEnvRelative-v2:
   use_sde: True
   sde_sample_freq: 64
   policy_kwargs: "dict(log_std_init=-2, net_arch=[256, 256])"
+
+# Personal
+XarmPDHandoverNoGoal-v1:
+  <<: *pybullet-defaults
+  train_freq: [8, "episode"]
+  n_timesteps: !!float 8e8
+  batch_size: 128
+  learning_starts: 3200

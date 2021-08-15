@@ -417,8 +417,8 @@ class ExperimentManager(object):
                 log_path=self.save_path,
                 eval_freq=self.eval_freq,
                 deterministic=self.deterministic_eval,
+                verbose = self.verbose
             )
-
             self.callbacks.append(eval_callback)
 
     @staticmethod

@@ -20,8 +20,8 @@ seaborn.set()
 if __name__ == "__main__":  # noqa: C901
     parser = argparse.ArgumentParser()
     parser.add_argument("--algo", help="RL Algorithm", default="ppo", type=str, required=False, choices=list(ALGOS.keys()))
-    parser.add_argument("--env", type=str, default="CartPole-v1", help="environment ID")
-    parser.add_argument("-tb", "--tensorboard-log", help="Tensorboard log dir", default="", type=str)
+    parser.add_argument("--env", type=str, default="XarmPDHandoverNoGoal-v1", help="environment ID")
+    parser.add_argument("-tb", "--tensorboard-log", help="Tensorboard log dir", default="tmp/stable-baselines/", type=str)
     parser.add_argument("-i", "--trained-agent", help="Path to a pretrained agent to continue training", default="", type=str)
     parser.add_argument(
         "--truncate-last-trajectory",
@@ -37,7 +37,7 @@ if __name__ == "__main__":  # noqa: C901
         "--eval-freq",
         help="Evaluate the agent every n steps (if negative, no evaluation). "
         "During hyperparameter optimization n-evaluations is used instead",
-        default=10000,
+        default=800000,
         type=int,
     )
     parser.add_argument(
@@ -46,8 +46,8 @@ if __name__ == "__main__":  # noqa: C901
         "Disabled if no argument is passed.",
         type=str,
     )
-    parser.add_argument("--eval-episodes", help="Number of episodes to use for evaluation", default=5, type=int)
-    parser.add_argument("--n-eval-envs", help="Number of environments for evaluation", default=1, type=int)
+    parser.add_argument("--eval-episodes", help="Number of episodes to use for evaluation", default=8, type=int)
+    parser.add_argument("--n-eval-envs", help="Number of environments for evaluation", default=4, type=int)
     parser.add_argument("--save-freq", help="Save the model every n steps (if negative, no checkpoint)", default=-1, type=int)
     parser.add_argument(
         "--save-replay-buffer", help="Save the replay buffer too (when applicable)", action="store_true", default=False

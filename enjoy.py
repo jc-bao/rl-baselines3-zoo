@@ -95,6 +95,7 @@ def main():  # noqa: C901
 
     if args.load_checkpoint is not None:
         model_path = os.path.join(log_path, f"rl_model_{args.load_checkpoint}_steps.zip")
+
         found = os.path.isfile(model_path)
 
     if args.load_last_checkpoint:
@@ -192,9 +193,10 @@ def main():  # noqa: C901
     try:
         for _ in range(args.n_timesteps):
             action, state = model.predict(obs, state=state, deterministic=deterministic)
+            # action = [env.action_space.sample()]*args.n_envs)
             obs, reward, done, infos = env.step(action)
-            if not args.no_render:
-                env.render("human")
+            # if not args.no_render:
+            #     env.render("human")
 
             episode_reward += reward[0]
             ep_len += 1
@@ -211,8 +213,6 @@ def main():  # noqa: C901
                 if done and not is_atari and args.verbose > 0:
                     # NOTE: for env using VecNormalize, the mean reward
                     # is a normalized reward when `--norm_reward` flag is passed
-                    print(f"Episode Reward: {episode_reward:.2f}")
-                    print("Episode Length", ep_len)
                     episode_rewards.append(episode_reward)
                     episode_lengths.append(ep_len)
                     episode_reward = 0.0

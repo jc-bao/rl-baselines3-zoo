@@ -159,3 +159,10 @@ HopperBulletEnv-v0:
 ReacherBulletEnv-v0:
   <<: *pybullet-defaults
   learning_rate: lin_0.0008
+
+XarmPDHandoverNoGoal-v1:
+  <<: *pybullet-defaults
+  # learning_rate: lin_0.0008
+  # n_timesteps: 10000
+  # n_envs: 1
+  # n_steps: 100
