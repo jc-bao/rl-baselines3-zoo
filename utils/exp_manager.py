@@ -257,7 +257,6 @@ class ExperimentManager(object):
         if self.verbose > 0:
             print("Default hyperparameters for environment (ones being tuned will be overridden):")
             pprint(saved_hyperparams)
-
         return hyperparams, saved_hyperparams
 
     @staticmethod
@@ -303,7 +302,6 @@ class ExperimentManager(object):
         self, hyperparams: Dict[str, Any]
     ) -> Tuple[Dict[str, Any], Optional[Callable], List[BaseCallback]]:
         self.n_envs = hyperparams.get("n_envs", 1)
-
         if self.verbose > 0:
             print(f"Using {self.n_envs} environments")
 

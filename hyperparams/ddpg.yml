@@ -122,6 +122,8 @@ InvertedPendulumSwingupBulletEnv-v0:
   <<: *pybullet-defaults
   n_timesteps: !!float 3e5
 
+# ======xarm========
+
 # Personal
 XarmPDHandoverNoGoal-v1:
   <<: *pybullet-defaults
@@ -129,4 +131,36 @@ XarmPDHandoverNoGoal-v1:
   n_timesteps: !!float 8e8
   batch_size: 128
   learning_starts: 3200
+
+XarmPDHandover-v0: &xarm-defaults
+  env_wrapper:
+    - sb3_contrib.common.wrappers.TimeFeatureWrapper
+  # policy
+  policy: 'MultiInputPolicy'
+  # collect
+  n_timesteps: !!float 1e6
+  learning_starts: 10000
+  gamma: 0.95
+  tau: 0.05
+  noise_type: 'normal'
+  noise_std: 0.1
+  n_envs: 100
+  # train
+  learning_rate: !!float 1e-3
+  gradient_steps: 1
+  train_freq: [1, "episode"]
+  batch_size: 1024
+  policy_kwargs: "dict(net_arch=[512, 512, 512])"
+  # buffer
+  buffer_size: 1000000
+  replay_buffer_class: HerReplayBuffer
+  replay_buffer_kwargs: "dict(
+    online_sampling=True,
+    goal_selection_strategy='future',
+    n_sampled_goal=4,
+  )"
+
+XarmPDPickAndPlace-v0:
+  <<: *xarm-defaults
+
 

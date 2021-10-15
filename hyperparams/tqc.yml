@@ -231,5 +231,12 @@ parking-v0:
     max_episode_length=100
   )"
 
+# ===Xarm===  Not support parallel
+
 XarmPDHandover-v0:
   <<: *her-defaults
+  n_envs: 3
+
+XarmPDPickAndPlace-v0:
+  <<: *her-defaults
+  n_envs: 3

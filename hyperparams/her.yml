@@ -63,6 +63,7 @@ FetchPickAndPlace-v1:
     #     reward_offset: 0
     #     n_successes: 4
     # - stable_baselines3.common.monitor.Monitor
+  n_envs: 2
   n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   model_class: 'tqc'
@@ -144,3 +145,47 @@ NeckGoalEnvRelativeDense-v2:
   n_sampled_goal: 4
   goal_selection_strategy: 'future'
   online_sampling: False
+
+
+XarmPDPickAndPlace-v0:
+  env_wrapper:
+    - sb3_contrib.common.wrappers.TimeFeatureWrapper
+  n_timesteps: !!float 1e6
+  policy: 'MlpPolicy'
+  model_class: 'ddpg'
+  n_sampled_goal: 4
+  goal_selection_strategy: 'future'
+  learning_starts: 10000
+  buffer_size: 1000000
+  batch_size: 1024
+  gamma: 0.98
+  learning_rate: !!float 1e-3
+  tau: 0.05
+  policy_kwargs: "dict(net_arch=[400, 300])"
+  online_sampling: True
+  noise_type: 'normal'
+  noise_std: 0.1
+  gradient_steps: 1
+  train_freq: 1
+
+
+XarmPDHandover-v0:
+  env_wrapper:
+    - sb3_contrib.common.wrappers.TimeFeatureWrapper
+  n_timesteps: !!float 1e6
+  policy: 'MlpPolicy'
+  model_class: 'ddpg'
+  n_sampled_goal: 4
+  goal_selection_strategy: 'future'
+  learning_starts: 10000
+  buffer_size: 1000000
+  batch_size: 1024
+  gamma: 0.98
+  learning_rate: !!float 1e-3
+  tau: 0.05
+  policy_kwargs: "dict(net_arch=[400, 300])"
+  online_sampling: True
+  noise_type: 'normal'
+  noise_std: 0.1
+  gradient_steps: 1
+  train_freq: 1
